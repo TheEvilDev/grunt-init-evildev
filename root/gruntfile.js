@@ -1,5 +1,6 @@
 module.exports = function(grunt){
     require('load-grunt-tasks')(grunt);
+    var path = require('path');
 
     grunt.initConfig({
         buildcontrol: {
@@ -35,12 +36,18 @@ module.exports = function(grunt){
         },
         jsdoc2md: {
             pages: {
-                src: 'src/**/*.js',
-                dest: 'dist/pages/api/documentation.md'
+                files: grunt.file.expandMapping('src/**/*.js', 'dist/pages/', {
+                    rename: function(dest, matchedSrcPath, options){
+                        return path.join(dest, matchedSrcPath.replace('.js','.md').replace('src/','api/'));
+                    }
+                })
             },
             wiki: {
-                src: 'src/**/*.js',
-                dest: 'dist/wiki/api/documentation.md'
+                files: grunt.file.expandMapping('src/**/*.js', 'dist/wiki/', {
+                    rename: function(dest, matchedSrcPath, options){
+                        return path.join(dest, matchedSrcPath.replace('.js','.md').replace('src/','api/'));
+                    }
+                })
             }
         }
     });
