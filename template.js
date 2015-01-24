@@ -34,17 +34,32 @@ exports.template = function(grunt, init, done) {
         props.wiki = 'git@github.com:TheEvilDev/' + props.name + '.wiki.git'
         props.npm_test = 'grunt test';
         props.devDependencies = {
+            "grunt": "~0.4.5",
             "grunt-build-control": "^0.2.2",
+            "grunt-contrib-clean": "^0.6.0",
             "grunt-contrib-concat": "^0.5.0",
             "grunt-contrib-jshint": "^0.10.0",
             "grunt-contrib-uglify": "^0.7.0",
             "grunt-contrib-watch": "^0.6.1",
             "grunt-jsdoc-to-markdown": "^0.4.2",
-            "load-grunt-tasks": "^2.0.0"
+            "grunt-karma": "^0.10.1",
+            "grunt-ng-annotate": "^0.9.2",
+            "jasmine-core": "^2.1.3",
+            "karma": "^0.12.31",
+            "karma-chrome-launcher": "^0.1.7",
+            "karma-detect-browsers": "^1.0.0",
+            "karma-firefox-launcher": "^0.1.4",
+            "karma-ie-launcher": "^0.1.5",
+            "karma-jasmine": "^0.3.5",
+            "karma-opera-launcher": "^0.1.0",
+            "karma-safari-launcher": "^0.1.1",
+            "load-grunt-tasks": "^2.0.0",
         };
 
         // Files to copy (and process).
         var files = init.filesToCopy(props);
+
+        init.copy('gitignore','.gitignore');
 
         // Add properly-named license files.
         init.addLicenseFiles(files, props.licenses);
